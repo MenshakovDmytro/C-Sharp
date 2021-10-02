@@ -11,7 +11,7 @@ namespace menshakov01
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter student's surname: ");
+            /*Console.WriteLine("Enter student's surname: ");
             string surname = Console.ReadLine();
             Console.WriteLine("Enter student's name: ");
             string name = Console.ReadLine();
@@ -28,12 +28,12 @@ namespace menshakov01
             Console.WriteLine("Enter student's specialty: ");
             string specialty = Console.ReadLine();
             Console.WriteLine("Enter student's academic performance: ");
-            string academicPerformance = Console.ReadLine();
+            string academicPerformance = Console.ReadLine();*/
 
             // Creating array of students
-            var students = new Student[] { new Student("Bily", "Vadim", "Ivanovich", "12-6-2001", "16-05-2018", 'a', "CIT", "Computer engineering", "100"),
-                new Student("Menshakov", "Dmytro", "Olegovich", "16-11-2000", "23-8-2018", 'a', "CIT", "Computer engineering", "90"),
-                new Student(name, surname, patronymic, dateOfBirth, dateOfAdmission, Convert.ToChar(groupIndex), faculty, specialty, academicPerformance)};
+            var students = new Student[] { new Student("Bily", "Vadim", "Ivanovich", DateTime.Parse("12-6-2001"), DateTime.Parse("16-05-2019"), 'a', "CIT", "123 - Computer engineering", 100),
+                new Student("Menshakov", "Dmytro", "Olegovich", DateTime.Parse("16-11-2000"), DateTime.Parse("23-8-2019"), 'a', "CIT", "123 - Computer engineering", 90)/*,
+                new Student(name, surname, patronymic, DateTime.Parse(dateOfBirth), DateTime.Parse(dateOfAdmission), Convert.ToChar(groupIndex), faculty, specialty, Int32.Parse(academicPerformance))*/};
 
             // Printing out students' data
             for (int i = 0; i < students.Length; i++)

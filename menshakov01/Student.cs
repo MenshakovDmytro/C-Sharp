@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace menshakov01
 {
@@ -7,6 +8,7 @@ namespace menshakov01
     /// class that models student
     /// contains student's fields and properties
     /// </summary>
+    [DataContract]
     public sealed class Student
     {
         /// <summary>
@@ -34,8 +36,8 @@ namespace menshakov01
        /// <param name="faculty"></param>
        /// <param name="specialty"></param>
        /// <param name="academicPerformance"></param>
-        public Student(string surname, string name, string patronymic, string dateOfBirth, string dateOfAdmission, char groupIndex,
-            string faculty, string specialty, string academicPerformance)
+        public Student(string surname, string name, string patronymic, DateTime dateOfBirth, DateTime dateOfAdmission, char groupIndex,
+            string faculty, string specialty, int academicPerformance)
         {
             Surname = surname;
             Name = name;
@@ -51,6 +53,7 @@ namespace menshakov01
         /// <summary>
         /// Public property Name
         /// </summary>
+        [DataMember]
         public string Name
         {
             get
@@ -70,10 +73,12 @@ namespace menshakov01
                 }
             }
         }
-        
+
         /// <summary>
         /// Public property Surname
         /// </summary>
+
+        [DataMember]
         public string Surname
         {
             get
@@ -97,6 +102,8 @@ namespace menshakov01
         /// <summary>
         /// Public property Patronymic
         /// </summary>
+
+        [DataMember]
         public string Patronymic
         {
             get
@@ -120,44 +127,52 @@ namespace menshakov01
         /// <summary>
         /// Public property DateOfBirth
         /// </summary>
-        public string DateOfBirth
+
+        [DataMember]
+        public DateTime DateOfBirth
         {
             get
             {
-                return _dateOfBirth.ToString();
+                return _dateOfBirth;
             }
 
             set
             {
-                if (!DateTime.TryParse(value, out _dateOfBirth) || (_dateOfBirth < new DateTime(2000, 1, 1) || _dateOfBirth > DateTime.Today))
+                if (value < new DateTime(2000, 1, 1) || value > DateTime.Today)
                 {
                     Console.WriteLine("You've entered wrong date of birth\n");
                 }
+                _dateOfBirth = value;
             }
         }
 
         /// <summary>
         /// Public property DateOfAdmission
         /// </summary>
-        public string DateOfAdmission
+
+        [DataMember]
+        public DateTime DateOfAdmission
         {
             get
             {
-                return _dateOfAdmission.ToString();
+                return _dateOfAdmission;
             }
 
             set
             {
-                if (!DateTime.TryParse(value, out _dateOfAdmission) || (_dateOfAdmission < new DateTime(2015, 1, 1) || _dateOfAdmission > DateTime.Today))
+                if (value < new DateTime(2015, 1, 1) || value > DateTime.Today)
                 {
                     Console.WriteLine("You've entered wrong date of admission\n");
                 }
+                _dateOfAdmission = value;
             }
         }
 
         /// <summary>
         /// Public property GroupIndex
         /// </summary>
+
+        [DataMember]
         public char GroupIndex
         {
             get
@@ -181,6 +196,8 @@ namespace menshakov01
         /// <summary>
         /// Public property Faculty
         /// </summary>
+
+        [DataMember]
         public string Faculty
         {
             get
@@ -204,6 +221,8 @@ namespace menshakov01
         /// <summary>
         /// Public property Specialty
         /// </summary>
+
+        [DataMember]
         public string Specialty
         {
             get
@@ -227,19 +246,22 @@ namespace menshakov01
         /// <summary>
         /// Public property AcademicPerformance
         /// </summary>
-        public string AcademicPerformance
+
+        [DataMember]
+        public int AcademicPerformance
         {
             get
             {
-                return $"{_academicPerformance}%";
+                return _academicPerformance;
             }
 
             set
             {
-                if (!int.TryParse(value, out _academicPerformance) || (_academicPerformance < 0 || _academicPerformance > 100))
+                if (_academicPerformance < 0 || _academicPerformance > 100)
                 {
                     Console.WriteLine("You've entered wrong academic performance\n");
                 }
+                _academicPerformance = value;
             }
         }
 
@@ -250,7 +272,7 @@ namespace menshakov01
         public override string ToString()
         {
             return $"Name: {Name}\nSurname: {Surname}\nPatronymic: {Patronymic}\nDate of birth: {DateOfBirth}\nDate of admission: {DateOfAdmission}\n" +
-                $"Group index: {GroupIndex}\nFaculty: {Faculty}\nSpecialty: {Specialty}\nAcademic performance: {AcademicPerformance}\n";
+                $"Group index: {GroupIndex}\nFaculty: {Faculty}\nSpecialty: {Specialty}\nAcademic performance: {AcademicPerformance}%\n";
         }
 
         /// <summary>

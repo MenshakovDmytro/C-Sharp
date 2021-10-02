@@ -96,10 +96,10 @@ namespace menshakov02
         }
 
         /// <summary>
-        /// 
+        /// Method that finds student in collection
         /// </summary>
         /// <param name="student"></param>
-        /// <returns></returns>
+        /// <returns>If such student exists returns it otherwise null</returns>
         public Student Find(Student student)
         {
             for (int i = 0; i < _students.Length; i++)
