@@ -317,7 +317,7 @@ namespace menshakov05
             foreach (var student in _students)
             {
                 dataForPrint.Clear();
-                var fullName = new StringBuilder(student.Surname + " " + student.Surname + " " + student.Patronymic);
+                var fullName = new StringBuilder(student.Surname + " " + student.Name + " " + student.Patronymic);
                 dataForPrint.AppendFormat("|{0,-30}|{1,-12}|{2,-21}|{3, -8}|", fullName, student.GroupIndex, student.Specialty, student.Faculty);
                 Console.WriteLine(dataForPrint);
                 Console.WriteLine(separator);
@@ -369,12 +369,20 @@ namespace menshakov05
 
             if (input.Length != 0)
             {
+                int previousSize = _students.Length;
+
                 for (int i = 0; i < _students.Length; i++)
                 {
                     if (comparator.Compare(_students[i], input) == 0)
                     {
-                        return Remove(_students[i]);
+                        Remove(_students[i]);
+                        i--;
                     }
+                }
+
+                if (previousSize != _students.Length)
+                {
+                    return true;
                 }
             }
 

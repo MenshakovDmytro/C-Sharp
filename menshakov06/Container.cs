@@ -369,12 +369,19 @@ namespace menshakov06
 
             if (input.Length != 0)
             {
+                int previousSize = _students.Length;
+
                 for (int i = 0; i < _students.Length; i++)
                 {
                     if (comparator.Compare(_students[i], input) == 0)
                     {
-                        return Remove(_students[i]);
+                        Remove(_students[i]);
                     }
+                }
+
+                if (previousSize != _students.Length)
+                {
+                    return true;
                 }
             }
 

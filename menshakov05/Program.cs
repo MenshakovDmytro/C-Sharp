@@ -12,6 +12,8 @@ namespace menshakov05
                 new Student("Menshakov", "Dmytro", "Olegovich", DateTime.Parse("16-11-2000"), DateTime.Parse("23-8-2019"), 'a', "CIT", "Computer engineering", 90)};
             var list = new Container(students);
             list.Add(customStudent);
+            list.ShowFormattedData();
+            list.RemoveByCriteria();
             /*list.WriteToFile();
             list.ReadFromFile();*/
             /*list.ShowData(customStudent);
