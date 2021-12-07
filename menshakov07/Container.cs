@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using menshakov01;
 
-namespace menshakov02
+namespace menshakov07
 {
     /// <summary>
     /// Class Container
     /// class that implements class container
     /// for collection of students
     /// </summary>
-    public sealed class Container
+    public class Container
     {
         /// <summary>
         /// Private field students
@@ -31,6 +32,11 @@ namespace menshakov02
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public Student[] Students => _students;
+
+        /// <summary>
         /// Method that adds student to collection
         /// </summary>
         /// <param name="student"></param>
@@ -42,7 +48,6 @@ namespace menshakov02
             }
 
             var newArr = new Student[_students.Length + 1];
-
             for (var i = 0; i < _students.Length; i++)
             {
                 newArr[i] = _students[i];
@@ -65,7 +70,6 @@ namespace menshakov02
             }
 
             var pos = -1;
-
             for (var i = 0; i < _students.Length; i++)
             {
                 if (_students[i].Equals(student))
@@ -81,11 +85,11 @@ namespace menshakov02
             }
 
             var newArr = new Student[_students.Length - 1];
-
             for (var i = 0; i < pos; i++)
             {
                 newArr[i] = _students[i];
             }
+
             for (var i = pos + 1; i < _students.Length; i++)
             {
                 newArr[i - 1] = _students[i];
@@ -96,20 +100,63 @@ namespace menshakov02
         }
 
         /// <summary>
-        /// Method that finds student in collection
+        /// Method that clears the collection
         /// </summary>
-        /// <param name="student"></param>
-        /// <returns>If such student exists returns it otherwise null</returns>
-        public Student Find(Student student)
+        public void Clear()
         {
-            for (var i = 0; i < _students.Length; i++)
+            _students = null;
+        }
+
+        /// <summary>
+        /// Method that removes student by chosen criteria
+        /// </summary>
+        /// <returns>True if student was removed otherwise false</returns>
+        public bool RemoveByCriteria()
+        {
+            Console.WriteLine("Enter criteria of the deletion:");
+            Console.WriteLine("1) group index");
+            Console.WriteLine("2) specialty");
+            Console.WriteLine("3) faculty\n");
+            Student[] students = null;
+            var input = Console.ReadLine();
+            switch (input)
             {
-                if (_students[i].Equals(student))
+                case "group index":
+                    Console.WriteLine("Write group index:");
+                    input = Console.ReadLine();
+                    students = _students.Where(s => s.GroupIndex.Equals(Convert.ToChar(input))).ToArray();
+                    break;
+                case "specialty":
+                    Console.WriteLine("Write specialty:");
+                    input = Console.ReadLine();
+                    students = _students.Where(s => s.Specialty.Equals(input)).ToArray();
+                    break;
+                case "faculty":
+                    Console.WriteLine("Write faculty:");
+                    input = Console.ReadLine();
+                    students = _students.Where(s => s.Faculty.Equals(input)).ToArray();
+                    break;
+                default:
+                    input = string.Empty;
+                    Console.WriteLine("Invalid option\n");
+                    break;
+            }
+
+            if (!string.IsNullOrEmpty(input))
+            {
+                var previousSize = _students.Length;
+                foreach (var item in _students.Intersect(students))
                 {
-                    return _students[i];
+                    Remove(item);
+                }
+
+                if (previousSize != _students.Length)
+                {
+                    return true;
                 }
             }
-            return null;
+
+            return false;
         }
 
         /// <summary>

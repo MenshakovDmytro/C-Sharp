@@ -282,7 +282,7 @@ namespace menshakov01
         /// <returns>If objects are equal returns true otherwise false</returns>
         public override bool Equals(object obj)
         {
-            Student other = obj as Student;
+            var other = obj as Student;
             return other != null && (Name, Surname, Patronymic).Equals((other.Name, other.Surname, other.Patronymic)); 
         }
 

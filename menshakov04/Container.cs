@@ -12,7 +12,7 @@ namespace menshakov04
     /// class that implements class container
     /// for collection of students
     /// </summary>
-    public sealed class Container : IEnumerable
+    public sealed class Container
     {
         /// <summary>
         /// Private field students
@@ -27,7 +27,7 @@ namespace menshakov04
         {
             _students = new Student[students.Length];
 
-            for (int i = 0; i < students.Length; i++)
+            for (var i = 0; i < students.Length; i++)
             {
                 _students[i] = students[i];
             }
@@ -46,7 +46,7 @@ namespace menshakov04
 
             var newArr = new Student[_students.Length + 1];
 
-            for (int i = 0; i < _students.Length; i++)
+            for (var i = 0; i < _students.Length; i++)
             {
                 newArr[i] = _students[i];
             }
@@ -67,9 +67,9 @@ namespace menshakov04
                 return false;
             }
 
-            int pos = -1;
+            var pos = -1;
 
-            for (int i = 0; i < _students.Length; i++)
+            for (var i = 0; i < _students.Length; i++)
             {
                 if (_students[i].Equals(student))
                 {
@@ -85,11 +85,11 @@ namespace menshakov04
 
             var newArr = new Student[_students.Length - 1];
 
-            for (int i = 0; i < pos; i++)
+            for (var i = 0; i < pos; i++)
             {
                 newArr[i] = _students[i];
             }
-            for (int i = pos + 1; i < _students.Length; i++)
+            for (var i = pos + 1; i < _students.Length; i++)
             {
                 newArr[i - 1] = _students[i];
             }
@@ -105,7 +105,7 @@ namespace menshakov04
         /// <returns>If such student exists returns it otherwise null</returns>
         public Student Find(Student student)
         {
-            for (int i = 0; i < _students.Length; i++)
+            for (var i = 0; i < _students.Length; i++)
             {
                 if (_students[i].Equals(student))
                 {
@@ -184,9 +184,9 @@ namespace menshakov04
         /// <param name="student"></param>
         public void EditData(Student student)
         {
-            int pos = -1;
+            var pos = -1;
 
-            for (int i = 0; i < _students.Length; i++)
+            for (var i = 0; i < _students.Length; i++)
             {
                 if (_students[i].Equals(student))
                 {
@@ -199,7 +199,7 @@ namespace menshakov04
             {
                 Console.WriteLine("Enter what field you want to edit:\n1) Name\n2) Surname\n3) Patronymic\n4) Date of birth\n5) Date of admission\n" +
                     "6) Group index\n7) Faculty\n8) Specialty\n9) Academic performance\n");
-                string option = Console.ReadLine();
+                var option = Console.ReadLine();
                 try
                 {
                     switch (option)
@@ -220,7 +220,7 @@ namespace menshakov04
                             _students[pos].DateOfAdmission = DateTime.Parse(Console.ReadLine());
                             break;
                         case "Group index":
-                            _students[pos].GroupIndex = Char.Parse(Console.ReadLine());
+                            _students[pos].GroupIndex = char.Parse(Console.ReadLine());
                             break;
                         case "Faculty":
                             _students[pos].Faculty = Console.ReadLine();
@@ -229,7 +229,7 @@ namespace menshakov04
                             _students[pos].Specialty = Console.ReadLine();
                             break;
                         case "Academic performance":
-                            _students[pos].AcademicPerformance = Int32.Parse(Console.ReadLine());
+                            _students[pos].AcademicPerformance = int.Parse(Console.ReadLine());
                             break;
                         default:
                             Console.WriteLine("Invalid option\n");
@@ -253,9 +253,9 @@ namespace menshakov04
         /// <param name="student"></param>
         public void ShowData(Student student)
         {
-            int pos = -1;
+            var pos = -1;
 
-            for (int i = 0; i < _students.Length; i++)
+            for (var i = 0; i < _students.Length; i++)
             {
                 if (_students[i].Equals(student))
                 {
@@ -267,24 +267,24 @@ namespace menshakov04
             if (pos != -1)
             {
                 var dataForPrint = new StringBuilder();
-                Console.WriteLine("Enter what data you want to get:\n1) Group\n2) Course\n3) Age\n");
-                string option = Console.ReadLine();
+                Console.WriteLine("Enter what data you want to get:\n1) group index\n2) course\n3) age\n");
+                var option = Console.ReadLine();
                 switch (option)
                 {
-                    case "Group":
+                    case "group index":
                         dataForPrint.AppendFormat("\nFaculty: {0}\nSpecialty: {1}\nDate of admission: {2}\nGroup index: {3}", student.Faculty,
                             student.Specialty, student.DateOfAdmission.Year, student.GroupIndex);
                         Console.WriteLine(dataForPrint.ToString());
                         dataForPrint.Clear();
                         break;
-                    case "Course":
+                    case "course":
                         dataForPrint.AppendFormat("\nCourse: {0}\nSemester: {1}\n", (DateTime.Now.Year - student.DateOfAdmission.Year) + 1,
                             Math.Ceiling((double)((12 * (DateTime.Now.Year - student.DateOfAdmission.Year) + DateTime.Now.Month - student.DateOfAdmission.Month)
                            - 2 * (DateTime.Now.Year - student.DateOfAdmission.Year))) / 5);    
                         Console.WriteLine(dataForPrint.ToString());
                         dataForPrint.Clear();
                         break;
-                    case "Age":
+                    case "age":
                         dataForPrint.AppendFormat("\nYears: {0}\nMonth: {1}\nDays: {2}\n", DateTime.Now.Year - student.DateOfBirth.Year, 
                             (Math.Abs(DateTime.Now.Month - student.DateOfBirth.Month)) - 1, DateTime.Now.Day);
                         Console.WriteLine(dataForPrint.ToString());
@@ -307,65 +307,7 @@ namespace menshakov04
         /// <returns>ContainerEnum</returns>
         public IEnumerator GetEnumerator()
         {
-            return new ContainerEnum(_students);
-        }
-    }
-
-    /// <summary>
-    /// Class ContainerEnum
-    /// class that implements IEnumerator for student class
-    /// </summary>
-    public sealed class ContainerEnum : IEnumerator
-    {
-        /// <summary>
-        /// Private fields of a class
-        /// </summary>
-        private Student[] _students;
-        private int _position = -1;
-
-        /// <summary>
-        /// Constructor with one parameter
-        /// </summary>
-        /// <param name="students"></param>
-        public ContainerEnum(Student[] students)
-        {
-            _students = students;
-        }
-
-        /// <summary>
-        /// Implemented Current property
-        /// </summary>
-        public object Current
-        {
-            get
-            {
-                try
-                {
-                    return _students[_position];
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    throw new InvalidOperationException();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Implemented MoveNext method
-        /// </summary>
-        /// <returns></returns>
-        public bool MoveNext()
-        {
-            _position++;
-            return _position < _students.Length;
-        }
-
-        /// <summary>
-        /// Implemented Reset method
-        /// </summary>
-        public void Reset()
-        {
-            _position = -1;
+            return new ContainerEnumerator(_students);
         }
     }
 }

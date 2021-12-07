@@ -36,7 +36,7 @@ namespace menshakov01
                 new Student(name, surname, patronymic, DateTime.Parse(dateOfBirth), DateTime.Parse(dateOfAdmission), Convert.ToChar(groupIndex), faculty, specialty, Int32.Parse(academicPerformance))*/};
 
             // Printing out students' data
-            for (int i = 0; i < students.Length; i++)
+            for (var i = 0; i < students.Length; i++)
             {
                 Console.WriteLine(students[i].ToString());
             }

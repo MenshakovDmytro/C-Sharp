@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{85A14625-061B-4BF2-A36B-119E3EF907C6}</ProjectGuid>
+    <ProjectGuid>{07E18125-682B-406B-99F2-6F4C1BBBD3E3}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>menshakov06</RootNamespace>
-    <AssemblyName>menshakov06</AssemblyName>
+    <RootNamespace>menshakov07</RootNamespace>
+    <AssemblyName>menshakov07</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,13 +46,14 @@
   <ItemGroup>
     <Compile Include="Container.cs" />
     <Compile Include="ContainerEnumerator.cs" />
+    <Compile Include="DataPrintService.cs" />
+    <Compile Include="DataProcessing.cs" />
+    <Compile Include="FileService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StudentExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\menshakov01\menshakov01.csproj">

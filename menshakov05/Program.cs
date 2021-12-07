@@ -30,7 +30,6 @@ namespace menshakov05
             }
 
             var stud = list.Find(customStudent);*/
-            list.CountAverage();
             list.ShowFormattedData();
             list.RemoveByCriteria();
             list.Clear();
