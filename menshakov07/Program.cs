@@ -22,6 +22,7 @@ namespace menshakov07
                         select student;
             var dataPrintService = new DataPrintService();
             dataPrintService.ShowFormattedData(query.ToArray());
+            Console.Read();
         }
     }
 }

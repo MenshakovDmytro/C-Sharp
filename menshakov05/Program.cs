@@ -13,7 +13,7 @@ namespace menshakov05
             var list = new Container(students);
             list.Add(customStudent);
             list.ShowFormattedData();
-            list.RemoveByCriteria();
+            //list.RemoveByCriteria();
             /*list.WriteToFile();
             list.ReadFromFile();*/
             /*list.ShowData(customStudent);

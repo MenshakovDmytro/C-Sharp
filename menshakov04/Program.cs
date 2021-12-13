@@ -15,7 +15,7 @@ namespace menshakov04
             /*list.WriteToFile();
             list.ReadFromFile();*/
             list.ShowData(customStudent);
-            list.EditData(customStudent);
+          //  list.EditData(customStudent);
             foreach (var item in list)
             {
                 Console.WriteLine(item.ToString());
